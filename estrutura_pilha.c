@@ -52,3 +52,21 @@ int obter_disco(Pilha* pilha, int pos) {
     }
     return atual ? atual->disco : 0;
 }
+
+
+// Mover disco
+int mover_disco(int origem, int destino) {
+    int disco = pop(&torres[origem - 1]);
+    if (disco == -1) {
+        printf("Torre de origem vazia!\n");
+        return 0;
+    }
+    if (torres[destino - 1].topo && torres[destino - 1].topo->disco < disco) {
+        printf("Movimento inválido: disco maior sobre menor!\n");
+        push(&torres[origem - 1], disco);
+        return 0;
+    }
+    push(&torres[destino - 1], disco);
+    movimentos++;
+    return 1;
+}
