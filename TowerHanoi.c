@@ -18,11 +18,16 @@ void inicializar_pilha(Pilha* pilha) {
     pilha->topo = NULL;
 }
 
-void push(Pilha* pilha, int disco) {
-    Node* novo = (Node*)malloc(sizeof(Node));
-    novo->disco = disco;
-    novo->prox = pilha->topo;
-    pilha->topo = novo;
+void DestruirLista(Lista **Lref) {
+    Lista *L = *Lref;
+    No *p = L->inicio;
+    while (p != NULL) {
+        No *aux = p;
+        p = p->prox;
+        free(aux);
+    }
+    free(L);
+    *Lref = NULL;
 }
 
 int pop(Pilha* pilha) {
@@ -54,9 +59,62 @@ int obter_disco(Pilha* pilha, int pos) {
     return atual ? atual->disco : 0;
 }
 
+// Funções de histórico
+
+Lista* historico = NULL;
+
+void exibir_historico() {
+    No* atual = historico->inicio;
+    if (!atual) {
+        printf("Histórico vazio!\n");
+        return;
+    }
+    printf("\n=== Histórico de Partidas ===\n");
+    while (atual) {
+        printf("Nome: %s | Data: %s | Movimentos: %d | Discos: %d\n",
+               atual->nome, atual->data, atual->mov, atual->qntd);
+        atual = atual->prox;
+    }
+}
+
+void buscar_por_nome(const char* nome) {
+    No* atual = historico->inicio;
+    int encontrado = 0;
+    printf("\n=== Resultados da busca por nome '%s' ===\n", nome);
+    while (atual) {
+        if (strstr(atual->nome, nome)) {
+            printf("Nome: %s | Data: %s | Movimentos: %d | Discos: %d\n",
+                   atual->nome, atual->data, atual->mov, atual->qntd);
+            encontrado = 1;
+        }
+        atual = atual->prox;
+    }
+    if (!encontrado) {
+        printf("Nenhuma partida encontrada para '%s'.\n", nome);
+    }
+}
+
+void buscar_por_data(const char* data) {
+    No* atual = historico->inicio;
+    int encontrado = 0;
+    printf("\n=== Resultados da busca por data '%s' ===\n", data);
+    while (atual) {
+        if (strcmp(atual->data, data) == 0) {
+            printf("Nome: %s | Data: %s | Movimentos: %d | Discos: %d\n",
+                   atual->nome, atual->data, atual->mov, atual->qntd);
+            encontrado = 1;
+        }
+        atual = atual->prox;
+    }
+    if (!encontrado) {
+        printf("Nenhuma partida encontrada para a data '%s'.\n", data);
+    }
+}
+
 // Menu principal
 int main() {
-    carregar_historico();
+    historico = CriarLista();
+    carregar_historico(historico);
     int opcao;
     char busca[50];
     do {
@@ -88,3 +146,7 @@ int main() {
                 printf("Opção inválida!\n");
         }
     } while (opcao != 5);
+    
+    DestruirLista(&historico);
+    return 0;
+}
