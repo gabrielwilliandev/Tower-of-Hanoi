@@ -59,57 +59,7 @@ int obter_disco(Pilha* pilha, int pos) {
     return atual ? atual->disco : 0;
 }
 
-// Funções de histórico
-
 Lista* historico = NULL;
-
-void exibir_historico() {
-    No* atual = historico->inicio;
-    if (!atual) {
-        printf("Histórico vazio!\n");
-        return;
-    }
-    printf("\n=== Histórico de Partidas ===\n");
-    while (atual) {
-        printf("Nome: %s | Data: %s | Movimentos: %d | Discos: %d\n",
-               atual->nome, atual->data, atual->mov, atual->qntd);
-        atual = atual->prox;
-    }
-}
-
-void buscar_por_nome(const char* nome) {
-    No* atual = historico->inicio;
-    int encontrado = 0;
-    printf("\n=== Resultados da busca por nome '%s' ===\n", nome);
-    while (atual) {
-        if (strstr(atual->nome, nome)) {
-            printf("Nome: %s | Data: %s | Movimentos: %d | Discos: %d\n",
-                   atual->nome, atual->data, atual->mov, atual->qntd);
-            encontrado = 1;
-        }
-        atual = atual->prox;
-    }
-    if (!encontrado) {
-        printf("Nenhuma partida encontrada para '%s'.\n", nome);
-    }
-}
-
-void buscar_por_data(const char* data) {
-    No* atual = historico->inicio;
-    int encontrado = 0;
-    printf("\n=== Resultados da busca por data '%s' ===\n", data);
-    while (atual) {
-        if (strcmp(atual->data, data) == 0) {
-            printf("Nome: %s | Data: %s | Movimentos: %d | Discos: %d\n",
-                   atual->nome, atual->data, atual->mov, atual->qntd);
-            encontrado = 1;
-        }
-        atual = atual->prox;
-    }
-    if (!encontrado) {
-        printf("Nenhuma partida encontrada para a data '%s'.\n", data);
-    }
-}
 
 // Menu principal
 int main() {
@@ -124,20 +74,20 @@ int main() {
         scanf("%d", &opcao);
         switch (opcao) {
             case 1:
-                jogar();
+                jogar(historico);
                 break;
             case 2:
-                exibir_historico();
+                exibir_historico(historico);
                 break;
             case 3:
                 printf("Digite o nome para busca: ");
                 scanf("%s", busca);
-                buscar_por_nome(busca);
+                buscar_por_nome(historico, busca);
                 break;
             case 4:
                 printf("Digite a data (ex: 06/06/2025): ");
                 scanf("%s", busca);
-                buscar_por_data(busca);
+                buscar_por_data(historico, busca);
                 break;
             case 5:
                 printf("Saindo\n");
