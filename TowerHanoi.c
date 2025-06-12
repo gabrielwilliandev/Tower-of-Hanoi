@@ -2,20 +2,17 @@
 #include <stdlib.h>
 #include "lista.h"
 
-
-int main(){
-    int menu_opcao;
-
+// Menu principal
+int main() {
+    carregar_historico();
+    int opcao;
+    char busca[50];
     do {
-        printf("\n--Torre de Hanoi --\n");
-        printf("1. Jogar\n");
-        printf("2. Exibir Historico\n");
-        printf("3. Sair\n");
-        printf("Escolha uma opcao (1 - 3): ");
-        scanf("%d", &menu_opcao);
-
-        
-        switch(menu_opcao){
+        printf("\n=== Torre de Hanoi ===\n");
+        printf("1. Jogar\n2. Exibir histórico\n3. Buscar por nome\n4. Buscar por data\n5. Sair\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
+        switch (opcao) {
             case 1:
                 jogar();
                 break;
@@ -23,18 +20,19 @@ int main(){
                 exibir_historico();
                 break;
             case 3:
-                SalvarHist();
-                DestruirLista();
-                printf("Saindo...");
+                printf("Digite o nome para busca: ");
+                scanf("%s", busca);
+                buscar_por_nome(busca);
+                break;
+            case 4:
+                printf("Digite a data (ex: 06/06/2025): ");
+                scanf("%s", busca);
+                buscar_por_data(busca);
+                break;
+            case 5:
+                printf("Saindo\n");
                 break;
             default:
-                printf("Opcao invalida! Tente novamente (1 - 3):\n");
-            
+                printf("Opção inválida!\n");
         }
-
-        while (menu_opcao != 3);
-    
-    }
-
-    return 0;
-}
+    } while (opcao != 5);
