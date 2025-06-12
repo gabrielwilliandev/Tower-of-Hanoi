@@ -23,7 +23,7 @@ void SalvarHist(Lista *L, const char *historico);
 
 void LerHist(Lista *L, const char *historico);
 
-
+void carregar_historico(Lista *L);
 
 
 #endif 
