@@ -147,4 +147,6 @@ void LerHist(Lista *L, const char *historico){
     }
     fclose(f);
 }
-
+void carregar_historico(Lista *L) {
+    LerHist(L, "historico.txt");
+}
