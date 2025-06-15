@@ -1,22 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stddef.h>
+#include "discos.h"
+
 #define LARGURA_DISCO 2
 
-// Estrutura - pilha (torre)
-typedef struct Node {
-    int disco;
-    struct Node* prox;
-    struct Node *ant;
-} Node;
-
-typedef struct _Pilha {
-    Node* topo;
-    Node* base;
-    size_t tam;
-} Pilha;
-
-// Funcoes p/ manipulacao da pilha
+// Funções para manipulação da pilha
 void inicializar_pilha(Pilha* pilha) {
     pilha->topo = NULL;
     pilha->base = NULL;
@@ -41,7 +29,7 @@ void push(Pilha* pilha, int disco) {
 
 int pop(Pilha* pilha) {
     if (pilha->tam == 0) {
-        printf("Pilha vazia!");
+        printf("Pilha vazia!\n");
         return -1;
     }
     Node* temp = pilha->topo;
@@ -59,12 +47,10 @@ int pop(Pilha* pilha) {
     return disco;
 }
 
-// Contar disco em uma torre
 int contar_discos(Pilha* pilha) {
     return pilha->tam;
 }
 
-// Obter disco em uma posicao especifica
 int obter_disco(Pilha* pilha, int pos) {
     Node* atual = pilha->base;
     for (int i = 0; i < pos && atual; i++) {

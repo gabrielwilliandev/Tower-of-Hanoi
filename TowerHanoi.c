@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h> // Para toupper
+#include <ctype.h>
 #include "discos.h"
 #include "historico.h"
 
@@ -13,21 +13,21 @@ typedef struct {
     char nome_jogador[30];
 } Jogo;
 
-// Variavel global para o historico
+// Variável global para o histórico
 Lista* historico = NULL;
 
-// Funcao para verificar se o jogo foi vencido
+// Função para verificar se o jogo foi vencido
 int verificar_vitoria(Jogo* jogo) {
     return contar_discos(&jogo->torres[2]) == jogo->num_discos;
 }
 
-// Funcao para mover disco entre torres
+// Função para mover disco entre torres
 int mover_disco(Jogo* jogo, int origem, int destino) {
     if (origem < 1 || origem > 3 || destino < 1 || destino > 3) {
-        printf("Torres invalidas! Use A, B ou C.\n");
+        printf("Torres inválidas! Use A, B ou C.\n");
         return 0;
     }
-    origem--; // Ajustar para indice 0-based
+    origem--; // Ajustar para índice 0-based
     destino--;
 
     int disco_origem = pop(&jogo->torres[origem]);
@@ -38,7 +38,7 @@ int mover_disco(Jogo* jogo, int origem, int destino) {
 
     Node* topo_destino = jogo->torres[destino].topo;
     if (topo_destino && disco_origem > topo_destino->disco) {
-        printf("Movimento invalido: disco maior nao pode ser colocado sobre disco menor!\n");
+        printf("Movimento inválido: disco maior não pode ser colocado sobre disco menor!\n");
         push(&jogo->torres[origem], disco_origem); // Devolver o disco
         return 0;
     }
@@ -57,7 +57,7 @@ void jogar(Lista* historico) {
     printf("Digite seu nome: ");
     scanf("%s", jogo.nome_jogador);
     do {
-        printf("Digite o numero de discos (3-8): ");
+        printf("Digite o número de discos (3-8): ");
         scanf("%d", &num_discos);
     } while (num_discos < 3 || num_discos > 8);
 
@@ -65,10 +65,10 @@ void jogar(Lista* historico) {
     jogo.num_discos = num_discos;
     jogo.movimentos = 0;
     for (int i = 0; i < 3; i++) {
-        inicializar_pilha(&jogo->torres[i]);
+        inicializar_pilha(&jogo.torres[i]);
     }
     for (int i = num_discos; i >= 1; i--) {
-        push(&jogo->torres[0], i);
+        push(&jogo.torres[0], i);
     }
 
     // Loop do jogo
@@ -76,24 +76,24 @@ void jogar(Lista* historico) {
         imprimir_torres(&jogo.torres[0], &jogo.torres[1], &jogo.torres[2], jogo.num_discos);
         printf("Movimentos: %d\n", jogo.movimentos);
         if (verificar_vitoria(&jogo)) {
-            printf("Parabens, %s! Voce venceu em %d movimentos!\n", jogo.nome_jogador, jogo.movimentos);
+            printf("Parabéns, %s! Você venceu em %d movimentos!\n", jogo.nome_jogador, jogo.movimentos);
             InserirInicio(historico, jogo.nome_jogador, jogo.movimentos, jogo.num_discos);
             SalvarHist(historico, "historico.txt");
             break;
         }
-                            
+
         printf("Digite a torre de origem e destino (ex: A B) ou 'R' para reiniciar, 'S' para sair: ");
         scanf(" %c", &opcao);
-        opcao = toupper(opcao); // Normalizar para maiusculas
+        opcao = toupper(opcao); // Normalizar para maiúsculas
 
         if (opcao == 'R') {
             // Reiniciar jogo
             for (int i = 0; i < 3; i++) {
-                while (pop(&jogo->torres[i]) != -1);
+                while (pop(&jogo.torres[i]) != -1);
                 inicializar_pilha(&jogo.torres[i]);
             }
             for (int i = num_discos; i >= 1; i--) {
-                push(&jogo->torres[0], i);
+                push(&jogo.torres[0], i);
             }
             jogo.movimentos = 0;
             printf("Jogo reiniciado!\n");
@@ -105,14 +105,14 @@ void jogar(Lista* historico) {
 
         // Validar entrada de origem e destino
         if (opcao != 'A' && opcao != 'B' && opcao != 'C') {
-            printf("Torre de origem invalida! Use A, B ou C.\n");
+            printf("Torre de origem inválida! Use A, B ou C.\n");
             continue;
         }
 
         scanf(" %c", &destino);
-        destino = toupper(destino); // Normalizar para maiusculas
+        destino = toupper(destino); // Normalizar para maiúsculas
         if (destino != 'A' && destino != 'B' && destino != 'C') {
-            printf("Torre de destino invalida! Use A, B ou C.\n");
+            printf("Torre de destino inválida! Use A, B ou C.\n");
             continue;
         }
 
@@ -121,9 +121,9 @@ void jogar(Lista* historico) {
         mover_disco(&jogo, orig, dest);
     }
 
-    // Liberar memoria
+    // Liberar memória
     for (int i = 0; i < 3; i++) {
-        while (pop(&jogo->torres[i]) != -1);
+        while (pop(&jogo.torres[i]) != -1);
     }
 }
 
@@ -135,8 +135,8 @@ int main() {
     char busca[50];
     do {
         printf("\n=== Torre de Hanoi ===\n");
-        printf("1. Jogar\n2. Exibir historico\n3. Buscar por nome\n4. Buscar por data\n5. Sair\n");
-        printf("Escolha uma opcao: ");
+        printf("1. Jogar\n2. Exibir histórico\n3. Buscar por nome\n4. Buscar por data\n5. Sair\n");
+        printf("Escolha uma opção: ");
         scanf("%d", &opcao);
         switch (opcao) {
             case 1:
@@ -159,7 +159,7 @@ int main() {
                 printf("Saindo\n");
                 break;
             default:
-                printf("Opcao invalida!\n");
+                printf("Opção inválida!\n");
         }
     } while (opcao != 5);
 
