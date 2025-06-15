@@ -3,8 +3,6 @@
 #ifndef LISTAH
 #define LISTAH
 
-
-
 typedef struct _no No;
 
 typedef struct _lista Lista;
@@ -31,5 +29,4 @@ void buscar_por_nome(Lista *L, const char *nome);
 
 void buscar_por_data(Lista *L, const char *data);
 
-
-#endif 
+#endif

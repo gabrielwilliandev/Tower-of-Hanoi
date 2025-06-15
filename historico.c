@@ -23,7 +23,7 @@ typedef struct _lista {
 Lista *CriarLista() {
     Lista *L = (Lista*)calloc(1, sizeof(Lista));
     if (L == NULL) {
-        printf("Erro ao alocar memória!\n");
+        printf("Erro ao alocar memoria!\n");
         exit(1);
     }
     L->inicio = NULL;
@@ -35,7 +35,7 @@ Lista *CriarLista() {
 No *CriarNo(char *nome, char *data, int mov, int qntd) {
     No *p = (No*)calloc(1, sizeof(No));
     if (p == NULL) {
-        printf("Erro ao alocar memória!\n");
+        printf("Erro ao alocar memoria!\n");
         exit(1);
     }
     p->mov = mov;
@@ -121,10 +121,10 @@ void carregar_historico(Lista *L) {
 void exibir_historico(Lista *L) {
     No* atual = L->inicio;
     if (!atual) {
-        printf("Histórico vazio!\n");
+        printf("Historico vazio!\n");
         return;
     }
-    printf("\n=== Histórico de Partidas ===\n");
+    printf("\n=== Historico de Partidas ===\n");
     while (atual) {
         printf("Nome: %s | Data: %s | Movimentos: %d | Discos: %d\n",
                atual->nome, atual->data, atual->mov, atual->qntd);
