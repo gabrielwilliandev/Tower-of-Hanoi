@@ -13,7 +13,7 @@ void inicializar_pilha(Pilha* pilha) {
 
 
 int topo(Pilha* pilha){
-    if(pilha->topo == NULL) return 0;
+    if(pilha->topo == NULL) return -1;
     return  pilha->topo->disco;
 }
 
