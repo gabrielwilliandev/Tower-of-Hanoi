@@ -11,6 +11,13 @@ void inicializar_pilha(Pilha* pilha) {
     pilha->tam = 0;
 }
 
+
+int topo(Pilha* pilha){
+    if(pilha->topo == NULL) return 0;
+    return  pilha->topo->disco;
+}
+
+
 void push(Pilha* pilha, int disco) {
     Node* novo = (Node*)malloc(sizeof(Node));
     novo->disco = disco;
@@ -52,9 +59,9 @@ int contar_discos(Pilha* pilha) {
 }
 
 int obter_disco(Pilha* pilha, int pos) {
-    Node* atual = pilha->base;
+    Node* atual = pilha->topo;
     for (int i = 0; i < pos && atual; i++) {
-        atual = atual->ant;
+        atual = atual->prox;
     }
     return atual ? atual->disco : 0;
 }
