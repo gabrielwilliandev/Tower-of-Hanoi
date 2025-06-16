@@ -37,7 +37,7 @@ int mover_disco(Jogo* jogo, int origem, int destino) {
     }
 
     int disco_destino = topo(&jogo->torres[destino]);;
-    if (disco_destino && disco_origem > disco_destino) {
+    if (disco_destino != -1 && disco_origem > disco_destino) {
         printf("Movimento inválido: disco maior não pode ser colocado sobre disco menor!\n");
         push(&jogo->torres[origem], disco_origem); // Devolver o disco
         return 0;
