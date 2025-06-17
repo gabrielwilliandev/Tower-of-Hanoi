@@ -9,7 +9,7 @@ typedef struct _no {
     int mov;
     int qntd;
     char nome[30];
-    char data[11];
+    char data[20];
     struct _no *prox;
     struct _no *ant;
 } No;
@@ -62,16 +62,13 @@ void DestruirLista(Lista **Lref) {
 }
 
 void Obterdata(char *data, size_t tam) {
-    time_t hoje = time(NULL);
-    struct tm *data_local = localtime(&hoje);
-    int dia = data_local->tm_mday;
-    int mes = data_local->tm_mon + 1;
-    int ano = data_local->tm_year + 1900;
-    snprintf(data, tam, "%02d/%02d/%04d", dia, mes, ano);
+    time_t agora = time(NULL);
+    struct tm *info = localtime(&agora);
+    strftime(data, tam, "%d/%m/%Y %H:%M", info);
 }
 
 void InserirInicio(Lista *L, char *nome, int mov, int qntd) {
-    char data[11];
+    char data[20];
     Obterdata(data, sizeof(data));
     No *p = CriarNo(nome, data, mov, qntd);
     p->prox = L->inicio;
@@ -92,22 +89,26 @@ void SalvarHist(Lista *L, const char *historico) {
     }
     No *p = L->inicio;
     while (p != NULL) {
-        fprintf(f, "%s;%s;%d;%d\n", p->nome, p->data, p->mov, p->qntd);
+        fprintf(f, "Nome: %s  | Data: %s  | Modo: %d discos  | Movimentos: %d\n",
+                p->nome, p->data, p->qntd, p->mov);
         p = p->prox;
     }
     fclose(f);
 }
 
+
 void LerHist(Lista *L, const char *historico) {
     FILE *f = fopen(historico, "r");
     if (f == NULL) {
-        return; // Arquivo pode não existir ainda
+        return;
     }
     char linha[256];
     while (fgets(linha, sizeof(linha), f)) {
-        char nome[30], data[11];
+        char nome[30], data[20];
         int mov, qntd;
-        if (sscanf(linha, "%[^;];%[^;];%d;%d", nome, data, &mov, &qntd) == 4) {
+
+        if (sscanf(linha, "Nome: %29[^|]| Data: %19[^|]| Modo: %d discos  | Movimentos: %d",
+                   nome, data, &qntd, &mov) == 4) {
             InserirInicio(L, nome, mov, qntd);
         }
     }
@@ -154,7 +155,7 @@ void buscar_por_data(Lista *L, const char* data) {
     int encontrado = 0;
     printf("\n=== Resultados da busca por data '%s' ===\n", data);
     while (atual) {
-        if (strcmp(atual->data, data) == 0) {
+        if (strncmp(atual->data, data, 10) == 0) {
             printf("Nome: %s | Data: %s | Movimentos: %d | Discos: %d\n",
                    atual->nome, atual->data, atual->mov, atual->qntd);
             encontrado = 1;
@@ -165,3 +166,4 @@ void buscar_por_data(Lista *L, const char* data) {
         printf("Nenhuma partida encontrada para a data '%s'.\n", data);
     }
 }
+

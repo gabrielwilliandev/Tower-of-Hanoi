@@ -89,7 +89,7 @@ gcc main.c discos.c historico.c -o hanoi
 
 ```
 Nome: Gabriel
-Data: 2025/06/17
+Data: 17/06/2025 22:57
 Modo: 3 discos
 Movimentos: 7
 ```
