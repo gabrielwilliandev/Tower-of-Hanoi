@@ -46,6 +46,5 @@ int verificar_vitoria(Jogo* jogo);
 int mover_disco(Jogo* jogo, int origem, int destino);
 void exibirAjuda(void);
 void jogar(Lista* historico);
-
 #endif
 
