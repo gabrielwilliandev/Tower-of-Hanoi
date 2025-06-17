@@ -54,7 +54,7 @@ Este projeto tem como objetivo desenvolver um simulador da **Torre de Hanói**, 
 * `main.c`: Função principal e menu
 * `discos.c/h`: Lógica das pilhas e movimentação dos discos
 * `historico.c/h`: Estrutura e manipulação do histórico
-* `historico.txt`: Arquivo com registros das partidas (inicialmente em branco)
+* `historico.txt`: Arquivo com registros das partidas (criado ao salvar um nome)
 
 ---
 
