@@ -196,7 +196,7 @@ void jogar(Lista* historico) {
         scanf("%d", &num_discos);
     } while (num_discos < 3 || num_discos > 8);
 
-    exibir_ajuda();
+
 
     // Inicializar jogo
     jogo.num_discos = num_discos;

@@ -44,6 +44,8 @@ void imprimir_disco(int disco, int largura_max);
 void imprimir_torres(Pilha* A, Pilha* B, Pilha* C, int altura);
 int verificar_vitoria(Jogo* jogo);
 int mover_disco(Jogo* jogo, int origem, int destino);
+void exibirAjuda(void);
 void jogar(Lista* historico);
+
 #endif
 
