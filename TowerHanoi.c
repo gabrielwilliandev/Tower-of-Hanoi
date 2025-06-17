@@ -34,12 +34,16 @@ int main() {
                 buscar_por_data(historico, busca);
                 break;
             case 5:
+                printf("Ajuda");
+                exibirAjuda();
+                break;
+            case 6:
                 printf("Saindo\n");
                 break;
             default:
                 printf("Opção invalida!\n");
         }
-    } while (opcao != 5);
+    } while (opcao != 6);
 
     DestruirLista(&historico);
     return 0;
