@@ -13,7 +13,7 @@ int main() {
     char busca[50];
     do {
         printf("\n=== Torre de Hanoi ===\n");
-        printf("1. Jogar\n2. Exibir historico\n3. Buscar por nome\n4. Buscar por data\n5. Sair\n");
+        printf("1. Jogar\n2. Exibir historico\n3. Buscar por nome\n4. Buscar por data\n5. Ajuda\n6.Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
         switch (opcao) {
@@ -34,7 +34,6 @@ int main() {
                 buscar_por_data(historico, busca);
                 break;
             case 5:
-                printf("Ajuda");
                 exibirAjuda();
                 break;
             case 6:
