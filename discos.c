@@ -191,10 +191,9 @@ void jogar(Lista* historico) {
 
     printf("Digite seu nome: ");
     scanf("%s", jogo.nome_jogador);
-    do {
-        printf("Digite o numero de discos (3-8): ");
-        scanf("%d", &num_discos);
-    } while (num_discos < 3 || num_discos > 8);
+    printf("Digite o numero de discos (3-8): ");
+    scanf("%d", &num_discos);
+  
 
 
 
