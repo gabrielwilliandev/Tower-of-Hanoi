@@ -170,6 +170,19 @@ int mover_disco(Jogo* jogo, int origem, int destino) {
     return 1;
 }
 
+void exibirAjuda(){
+    printf("\n===== AJUDA =====\n");
+    printf("Objetivo do jogo: Mover todos os discos da Torre A para a Torre C\n");
+    printf("Regras:\n");
+    printf(" - Só é possível mover o topo de uma torre por vez\n");
+    printf(" - Não é permitido colocar um disco maior sobre um menor\n\n");
+    printf("Comandos:\n");
+    printf(" A B -> Move o topo da Torre A para a Torre B\n");
+    printf(" R -> Reinicia o jogo\n");
+    printf(" S -> Sai do jogo\n");
+    printf("==============\n\n");
+}
+
 // Função principal do jogo
 void jogar(Lista* historico) {
     Jogo jogo;
@@ -182,6 +195,8 @@ void jogar(Lista* historico) {
         printf("Digite o numero de discos (3-8): ");
         scanf("%d", &num_discos);
     } while (num_discos < 3 || num_discos > 8);
+
+    exibir_ajuda();
 
     // Inicializar jogo
     jogo.num_discos = num_discos;
