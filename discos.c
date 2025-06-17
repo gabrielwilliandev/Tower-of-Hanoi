@@ -174,8 +174,8 @@ void exibirAjuda(){
     printf("\n===== AJUDA =====\n");
     printf("Objetivo do jogo: Mover todos os discos da Torre A para a Torre C\n");
     printf("Regras:\n");
-    printf(" - Só é possível mover o topo de uma torre por vez\n");
-    printf(" - Não é permitido colocar um disco maior sobre um menor\n\n");
+    printf(" - So e possivel mover o topo de uma torre por vez\n");
+    printf(" - Nao e permitido colocar um disco maior sobre um menor\n\n");
     printf("Comandos:\n");
     printf(" A B -> Move o topo da Torre A para a Torre B\n");
     printf(" R -> Reinicia o jogo\n");
